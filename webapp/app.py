@@ -74,6 +74,7 @@ import keras.backend as K
 import math
 import random
 import numpy as np
+import tensorflow as tf
 
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import imshow
@@ -105,7 +106,7 @@ from keras.applications.inception_v3 import preprocess_input, decode_predictions
 from keras.preprocessing import image
 from keras.layers import Input
 import os
-from keras import backend as K
+
 
 target_size = (299, 299) #fixed size for InceptionV3 architecture
 
@@ -230,22 +231,22 @@ def upload():
 
         # Make prediction
         print("b4 preds")
-        # preds = model_predict(img_path, model,  f.filename)
+        preds = model_predict(img_path, model,  f.filename)
         print("after preds")
 
         # Process your result for human
         # pred_class = preds.argmax(axis=-1)            # Simple argmax
-        preds = "hi there " 
-        
-        result = preds
+        preds = str(preds).strip('()').split(",")
+        result = str(preds[0])
+        print("results", result)
         #return result
       
         return result
     return None
 # ======== functions ==========================================================#
 def load_trained_model():
-    K.clear_session()
-    model = load_model('modelFood_6.h5')
+    model = model_definition()
+    #model = load_model('modelFood_6.h5')
     return model
 
 # helper function to load image and return it and input vector
@@ -258,17 +259,35 @@ def get_image(path):
 
 
 def model_predict(img_path, model, filename):
-    string_class = "apple_pie \n carrot_cake \n cheesecake \n cup_cakes \n donuts \n dumplings"
+    string_class = "apple_pie\ncarrot_cake\ncheesecake\ncup_cakes\ndonuts\ndumplings"
     categories = string_class.splitlines()
     print(categories, len(categories))
    
     print(img_path)
     img, x = get_image(img_path)
-    probabilities = model.predict(x)[0]
+    with graph.as_default():	
+        probabilities = model.predict(x)[0]
     
     print("PROBS" , probabilities)
     result = [( categories[x], (-np.sort(-probabilities)[i]*100)) for i, x in enumerate(np.argsort(-probabilities)[:5])];
     return result[0]
+def model_definition():
+    global model
+    inc = InceptionV3(weights='imagenet', include_top=False, input_tensor=Input(shape=(299, 299, 3)))
+    x = inc.output
+    x = AveragePooling2D(pool_size=(8, 8))(x)
+    x = Dropout(.2)(x) # Dropout slows training down
+    x = Flatten()(x)
+    predictions = Dense(6, kernel_initializer='glorot_uniform', kernel_regularizer=l2(.0005), activation='softmax')(x)
+    model = Model(inputs=inc.input, outputs=predictions)
+        
+    model = load_model(filepath='inceptionv3_3_1.hdf5')
+    
+    #opt = SGD(lr=0.01, momentum=.9)
+    model.compile(optimizer="rmsprop", loss='categorical_crossentropy', metrics=['accuracy'])
+    global graph
+    graph = tf.get_default_graph()    
+    return model
 
 
 model = load_trained_model()
