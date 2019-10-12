@@ -27,3 +27,14 @@
 .settings-area {
   padding: 30px;
 }
+
+h1.mt-4 {
+    text-align: center;
+}
+
+img.img-fluid.rounded {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
