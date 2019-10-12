@@ -52,3 +52,10 @@ button#btn-predict {
     margin-left: auto;
     margin-right: auto;
 }
+
+.img-preview {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
