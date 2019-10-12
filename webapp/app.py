@@ -230,12 +230,12 @@ def upload():
 
         # Make prediction
         print("b4 preds")
-        preds = model_predict(img_path, model,  f.filename)
+        # preds = model_predict(img_path, model,  f.filename)
         print("after preds")
 
         # Process your result for human
         # pred_class = preds.argmax(axis=-1)            # Simple argmax
-        
+        preds = "hi there " 
         
         result = preds
         #return result
