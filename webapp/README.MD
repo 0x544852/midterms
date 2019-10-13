@@ -38,8 +38,8 @@ Give an example
 
 ## Authors
 
-***Darren Scott Hinde*** 
-***Thomas Reiche ***
+- ***Darren Scott Hinde*** 
+- ***Thomas Reiche ***
 
 ## License
 
