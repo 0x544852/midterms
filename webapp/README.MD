@@ -1,4 +1,6 @@
-### MMWMLC midterms project
+
+![Alt text](images/logo.svg?raw=true "Sign In")
+
 # Food AI
 
 Using deeplearning we can take pictures of our food to determine what we are eating and get all kinds of related information about the food from recipes, calorie and possibly risks/benifits.
