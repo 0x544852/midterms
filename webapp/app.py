@@ -1,14 +1,44 @@
 # -*- coding: utf-8 -*-
 
+from flask import Flask, redirect, url_for, render_template, request, session
 from scripts import tabledef
 from scripts import forms
 from scripts import helpers
-from flask import Flask, redirect, url_for, render_template, request, session
 from dotenv import load_dotenv
 import json
-import sys
 import os
 import stripe
+<<<<<<< Updated upstream
+=======
+import keras
+from keras.preprocessing import image
+from keras.applications.imagenet_utils import preprocess_input
+from keras.utils.np_utils import to_categorical
+from keras.applications.inception_v3 import preprocess_input
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from werkzeug.utils import secure_filename
+#from mlxtend.preprocessing import minmax_scaling
+import h5py
+from keras.models import Sequential, Model
+from keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPool2D, GlobalAveragePooling2D, Input, BatchNormalization, Multiply, Activation
+from keras.optimizers import RMSprop, SGD
+from keras.models import Model, load_model
+from keras.layers import Conv2D, MaxPooling2D
+from keras.layers import Convolution2D, MaxPooling2D, ZeroPadding2D, GlobalAveragePooling2D, AveragePooling2D
+from keras.regularizers import l2
+from keras.preprocessing.image import ImageDataGenerator
+from keras import backend as K
+import tensorflow as tf
+import os
+from keras.applications.inception_v3 import InceptionV3
+import os
+
+import requests
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
+>>>>>>> Stashed changes
 
 app = Flask(__name__)
 app.secret_key = os.urandom(12)  # Generic key for dev purposes only
@@ -26,6 +56,17 @@ stripe.api_key = secret_key
 #from flask_heroku import Heroku
 #heroku = Heroku(app)
 
+<<<<<<< Updated upstream
+=======
+############################################
+
+
+
+
+target_size = (299, 299) #fixed size for InceptionV3 architecture
+
+
+>>>>>>> Stashed changes
 # ======== Routing =========================================================== #
 # -------- Login ------------------------------------------------------------- #
 @app.route('/', methods=['GET', 'POST'])
@@ -129,6 +170,99 @@ def product():
     return redirect(url_for('login'))
 
 
+<<<<<<< Updated upstream
+=======
+@app.route('/predict', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST':
+        # Get the file from post request
+        f = request.files['image']
+
+        # Save the file to ./uploads
+        basepath = os.path.dirname(__file__)
+        print("f.filename", f.filename)
+        file_path = os.path.join(
+            basepath, 'uploads', secure_filename(f.filename))
+        f.save(file_path)
+        img_path = "./uploads/" + f.filename
+
+        # Make prediction
+        print("b4 preds")
+        preds = model_predict(img_path, model,  f.filename)
+        print("after preds")
+
+        # Process your result for human
+        # pred_class = preds.argmax(axis=-1)            # Simple argmax
+        preds = str(preds).strip('()').split(",")
+        result = str(preds[0])
+        print("results", result)
+        #return result
+      
+        return result
+    return None
+# ======== functions ==========================================================#
+def load_trained_model():
+    model = model_definition()
+    #model = load_model('modelFood_6.h5')
+    return model
+
+# helper function to load image and return it and input vector
+def get_image(path):
+    img = image.load_img(path, target_size=(299, 299))
+    x = image.img_to_array(img)
+    x = np.expand_dims(x, axis=0)
+    x = preprocess_input(x)
+    return img, x
+
+
+def model_predict(img_path, model, filename):
+    string_class = "apple_pie\ncarrot_cake\ncheesecake\ncup_cakes\ndonuts\ndumplings"
+    categories = string_class.splitlines()
+    print(categories, len(categories))
+   
+    print(img_path)
+    img, x = get_image(img_path)
+    with graph.as_default():	
+        probabilities = model.predict(x)[0]
+    
+    print("PROBS" , probabilities)
+    result = [( categories[x], (-np.sort(-probabilities)[i]*100)) for i, x in enumerate(np.argsort(-probabilities)[:5])];
+    return result[0]
+def model_definition():
+    global model
+    inc = InceptionV3(weights='imagenet', include_top=False, input_tensor=Input(shape=(299, 299, 3)))
+    x = inc.output
+    x = AveragePooling2D(pool_size=(8, 8))(x)
+    x = Dropout(.2)(x) # Dropout slows training down
+    x = Flatten()(x)
+    predictions = Dense(6, kernel_initializer='glorot_uniform', kernel_regularizer=l2(.0005), activation='softmax')(x)
+    model = Model(inputs=inc.input, outputs=predictions)
+    
+    
+    model_exists = os.path.isfile('.inceptionv3_3_1.hdf5')
+    if not model_exists:
+         file_id = '1-4cD6g8ZgOjP_9YbGRFrJ5hU_cZgOTCU'
+         
+         gdd.download_file_from_google_drive(file_id='1-4cD6g8ZgOjP_9YbGRFrJ5hU_cZgOTCU',
+                                        dest_path='./inceptionv3_3_1.hdf5',
+                                        unzip=False)
+        
+    model = load_model('inceptionv3_3_1.hdf5')
+    
+    #opt = SGD(lr=0.01, momentum=.9)
+    model.compile(optimizer="rmsprop", loss='categorical_crossentropy', metrics=['accuracy'])
+    global graph
+    graph = tf.get_default_graph()    
+    return model
+
+from google_drive_downloader import GoogleDriveDownloader as gdd
+
+
+
+model = load_trained_model()
+
+print("model loaded successfully")
+>>>>>>> Stashed changes
 # ======== Main ============================================================== #
 if __name__ == "__main__":
     # thr: address and port changed
