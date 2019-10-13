@@ -1,5 +1,5 @@
 
-![Alt text](images/logo.PNG?raw=true "Sign In")
+![Alt text](images/logo.PNG?raw=true "Logo")
 
 # Food AI
 
