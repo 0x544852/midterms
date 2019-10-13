@@ -39,7 +39,7 @@ Give an example
 ## Authors
 
 - ***Darren Scott Hinde*** 
-- ***Thomas Reiche ***
+- ***Thomas Reiche***
 
 ## License
 
