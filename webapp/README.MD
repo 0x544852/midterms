@@ -27,9 +27,8 @@ pip install -r requirements.txt
 ## Result
 ![Alt text](images/result.PNG?raw=true "Result")
 Give an example
-```
 
-### Development Cycle: 
+## Development Cycle: 
 - Alot of time went into researching the correct approach to develop our models, that said there were a few areas we still need to improve on. 
 - The models are quite large and need to be compressed, looking into dynamically adding new classes for specific users. 
 -Adding new classes dynamically is a huge challenge and we spent a considerable amount of time researching this but was decided due to time constraints
