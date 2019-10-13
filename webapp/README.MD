@@ -1,55 +1,38 @@
 ### MMWMLC midterms project
-Produced by: 
-Darren Scott Hinde 
-Thomas Reiche 
-
 # Food AI
 
 Using deeplearning we can take pictures of our food to determine what we are eating and get all kinds of related information about the food from recipes, calorie and possibly risks/benifits.
 This project is ambitous in the long run we will develop a few seperate models which will be used in a pipe-line, where one model will determine features of the food, from there we can isolated which classes of food could be in the image. Using a model pipeline will increase the overall accuaracy of our predictions.
+##Features to be added
+- Get allreciepes that could be used on a certain dish
+- Calorie Counting
+- Feature detection and personalized Food CNN for each user
+
+
 
 ## Getting Started
 pip install -r requirements.txt
 
-
+## Sign In page
 ![Alt text](images/signin.PNG?raw=true "Sign In")
+## Home page
 ![Alt text](images/predict.PNG?raw=true "Home")
+## Upload your image
 ![Alt text](images/predict2.PNG?raw=true "Upload image")
+## Result
 ![Alt text](images/result.PNG?raw=true "Result")
 Give an example
 ```
 
-### And coding style tests
+### Development Cycle: 
+- Alot of time went into researching the correct approach to develop our models, that said there were a few areas we still need to improve on. The models are quite large and need to be compressed, looking into dynamically adding new classes for specific users. Adding new classes dynamically is a huge challenge and we spent a considerable amount of time researching this but was decided due to time constraints to quickly finish a working version of a smal model and update it with features we want to implement. 
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+ 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+***Darren Scott Hinde*** 
+***Thomas Reiche ***
 
 ## License
 
@@ -57,6 +40,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* https://github.com/Murgio/Food-Recipe-CNN
+
