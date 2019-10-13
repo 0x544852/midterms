@@ -6,7 +6,7 @@
 Using deeplearning, we can take pictures of our food to determine what we are eating and get all kinds of related information about the food from recipes, calorie and possibly risks/benefits.
 This project is ambitious; in the long run we will develop a few seperate models which will be used in a pipe-line, where one model will determine features of the food, from there we can isolated which classes of food could be in the image. Using a model pipeline will increase the overall accuracy of our predictions.
 
-
+Try it at http://v31309.1blu.de:5000/
 
 ## Features to be added
 - Get allreciepes that could be used on a certain dish
