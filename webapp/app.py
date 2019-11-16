@@ -8,8 +8,7 @@ from dotenv import load_dotenv
 import json
 import os
 import stripe
-<<<<<<< Updated upstream
-=======
+
 import keras
 from keras.preprocessing import image
 from keras.applications.imagenet_utils import preprocess_input
@@ -38,7 +37,6 @@ import os
 import requests
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
->>>>>>> Stashed changes
 
 app = Flask(__name__)
 app.secret_key = os.urandom(12)  # Generic key for dev purposes only
@@ -56,17 +54,9 @@ stripe.api_key = secret_key
 #from flask_heroku import Heroku
 #heroku = Heroku(app)
 
-<<<<<<< Updated upstream
-=======
-############################################
-
-
-
 
 target_size = (299, 299) #fixed size for InceptionV3 architecture
 
-
->>>>>>> Stashed changes
 # ======== Routing =========================================================== #
 # -------- Login ------------------------------------------------------------- #
 @app.route('/', methods=['GET', 'POST'])
@@ -92,7 +82,8 @@ def login():
         return render_template('payment.html', pub_key=pub_key)
     else:
     # user paid already    
-        return render_template('product.html', user=user)
+        #return render_template('product.html', user=user)
+        return render_template('home.html', user=user)
 
 
 @app.route("/logout")
@@ -170,8 +161,6 @@ def product():
     return redirect(url_for('login'))
 
 
-<<<<<<< Updated upstream
-=======
 @app.route('/predict', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
@@ -262,7 +251,6 @@ from google_drive_downloader import GoogleDriveDownloader as gdd
 model = load_trained_model()
 
 print("model loaded successfully")
->>>>>>> Stashed changes
 # ======== Main ============================================================== #
 if __name__ == "__main__":
     # thr: address and port changed
